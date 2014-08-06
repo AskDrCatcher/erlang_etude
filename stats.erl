@@ -32,12 +32,14 @@ mean(L) ->
 
 stdv (L) ->
    {Sum, SumOfSquare} = 
-   lists:foldl(fun(X, {Sum, _SumOfSquare}) ->
-                    {X + Sum, math:pow(X, 2) + Sum} 
+   lists:foldl(fun(X, {Sum, SumOfSquare}) ->
+                    {X + Sum, math:pow(X, 2) + SumOfSquare} 
                 end, {0, 0}, L),
     N = length(L),
     NSumOfSquare = N * SumOfSquare,
     SumSum = Sum * Sum,
-    math:sqrt(erlang:abs((NSumOfSquare - SumSum) / (N * (N - 1)))).
+    %io:fwrite("result is ~p ~p ~p ~p~n", 
+     %[SumOfSquare, Sum, N, ((NSumOfSquare - SumSum) / (N * (N - 1)))]),
+    math:sqrt((NSumOfSquare - SumSum) / (N * (N - 1))).
 
 
