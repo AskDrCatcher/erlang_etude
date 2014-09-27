@@ -143,3 +143,4 @@ subtotal(Item, Accumulator) ->
     EndSeconds = calendar:datetime_to_gregorian_seconds(
             {Item#phone_call.end_date, Item#phone_call.end_time}),
     Accumulator + ((EndSeconds - StartSeconds + 59) div 60).
+
