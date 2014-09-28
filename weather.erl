@@ -8,6 +8,7 @@
          handle_info/2,
          terminate/2,
          code_change/3]). % gen_server callbacks
+-export([report/1, recent/0]). % wrapper functions
 -define(SERVER, ?MODULE). % macro that just defines this module as server
 
 %%% convenience method for startup
@@ -90,3 +91,12 @@ extract_text(Content) ->
     xmlText -> Item#xmlText.value;
     _ -> ""
   end.
+
+%% Wrapper to hide internal details when getting a weather report
+report(Station) ->
+    gen_server:call(?SERVER, Station).
+
+%% Wrapper to hide internal details when getting a list of recently used
+%% stations.
+recent() ->
+    gen_server:cast(?SERVER, "").
